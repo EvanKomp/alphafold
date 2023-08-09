@@ -508,7 +508,9 @@ def main(argv):
     data_pipeline = monomer_data_pipeline
 
   model_runners = {}
-  model_names = config.MODEL_PRESETS[FLAGS.model_preset]
+  model_names = config.MODEL_PRESETS.get(FLAGS.model_preset, FLAGS.model_preset)
+  if type(model_names) is not tuple:
+    model_names = tuple(model_names.split(','))
   for model_name in model_names:
     model_config = config.model_config(model_name)
     if run_multimer_system:

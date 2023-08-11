@@ -41,11 +41,13 @@ from alphafold.model import model
 from alphafold.relax import relax
 import jax.numpy as jnp
 import numpy as np
+import tensorflow as tf
 
 # Internal import (7716).
 
 logging.set_verbosity(logging.INFO)
-
+devices = tf.config.list_physical_devices('GPU')
+logging.info(f"devices {devices}")
 
 @enum.unique
 class ModelsToRelax(enum.Enum):
